@@ -1,0 +1,42 @@
+{
+  "name": "sticky-android",
+  "version": "21.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./gradlew clean build",
+    "test": "./gradlew test",
+    "release": "standard-version",
+    "version": "echo $npm_package_version"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.7",
+    "next-standard-version": "^1.0.1",
+    "standard-version": "^9.1.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "skipCI": false,
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run test build",
+      "pre-push": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcauto/sticky-android.git"
+  },
+  "author": "Deo Kim <nexters@kakao.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mcauto/sticky-android/issues"
+  },
+  "homepage": "https://github.com/mcauto/sticky-android#readme"
+}
