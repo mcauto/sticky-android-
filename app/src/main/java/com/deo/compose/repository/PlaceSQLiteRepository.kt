@@ -5,7 +5,7 @@ import com.deo.compose.model.dao.SpatialDao
 import com.deo.compose.model.entity.Place
 import javax.inject.Inject
 
-class PlaceRepositoryImpl @Inject constructor(
+class PlaceSQLiteRepository @Inject constructor(
     private val placeDao: PlaceDao,
     private val rawQueryDao: SpatialDao,
 ) : PlaceRepository {

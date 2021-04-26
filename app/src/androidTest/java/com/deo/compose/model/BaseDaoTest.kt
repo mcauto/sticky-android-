@@ -33,6 +33,7 @@ open class BaseDaoTest {
 
     @After
     fun tearDown() {
+        database.clearAllTables()
         database.close()
     }
 }
