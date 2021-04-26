@@ -46,5 +46,4 @@ object DaoModule {
     fun provideSpatialDao(
         database: StickyDatabase
     ): SpatialDao = database.getSpatialDao()
-
 }
