@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b816af636dc4362af948a6fa171f64be",
+    "identityHash": "33f184d49c0136fab605623190aa75f6",
     "entities": [
       {
         "tableName": "places",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`placeId` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, `geometry` BLOB NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`placeId` INTEGER PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `geometry` BLOB, `distance` REAL)",
         "fields": [
           {
             "fieldPath": "placeId",
@@ -27,10 +27,28 @@
             "notNull": true
           },
           {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
             "fieldPath": "geometry",
             "columnName": "geometry",
             "affinity": "BLOB",
-            "notNull": true
+            "notNull": false
+          },
+          {
+            "fieldPath": "distance",
+            "columnName": "distance",
+            "affinity": "REAL",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -188,7 +206,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b816af636dc4362af948a6fa171f64be')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '33f184d49c0136fab605623190aa75f6')"
     ]
   }
 }

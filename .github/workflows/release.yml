@@ -3,7 +3,7 @@ name: Release
 
 on:
   pull_request:
-    types: [closed]
+    types: [ closed ]
     branches:
       - main
 
@@ -38,9 +38,9 @@ jobs:
           echo "$DESCRIPTION" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV 
-          sed -i "s/versionCode = .*/versionCode = ${GITHUB_RUN_NUMBER}/g" app/build.gradle.kts
-          sed -i "s/versionName = .*/versionName = \"${VERSION}\"/g" app/build.gradle.kts
-          git add app/build.gradle.kts
+          sed -i "s/versionCode = .*/versionCode = ${GITHUB_RUN_NUMBER}/g" app/build.gradle
+          sed -i "s/versionName = .*/versionName = \"${VERSION}\"/g" app/build.gradle
+          git add app/build.gradle
           git commit --no-verify -m "chore(release): ${VERSION}"
           npx standard-version
           git tag -d v$VERSION
