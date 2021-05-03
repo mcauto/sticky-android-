@@ -32,12 +32,10 @@ class PlaceDaoTest : BaseDaoTest() {
 
     @Test
     fun `체크인하는 장소 저장`() = runBlockingTest {
-        val result = rawQueryDao.makePoint(1.0, 0.0)
         val id = placeDao.upsert(
-            Place(
-                name = "강남 11출 또피빈",
-                geometry = result
-            )
+            name = "강남 11출 또피빈",
+            latitude = 1.0,
+            longitude = 0.0
         )
         val place = placeDao.get(id)
         assert(place != null)
@@ -45,39 +43,25 @@ class PlaceDaoTest : BaseDaoTest() {
 
     @Test
     fun `장소 불러오기`() = runBlockingTest {
-        database.runInTransaction(Runnable {
-            val result = rawQueryDao.makePoint(1.0, 0.0)
-            launch {
-                val id = placeDao.upsert(
-                    Place(
-                        name = "강남 11출 또피빈",
-                        geometry = result
-                    )
-                )
-                val place = placeDao.getWithCategory(id)
-                print(place)
-            }
-        })
+        val id = placeDao.upsert(
+            name = "강남 11출 또피빈",
+            latitude = 1.0,
+            longitude = 0.0
+        )
+        val place = placeDao.get(id)
+        assert(place != null)
     }
 
     @Test
     fun `반경 내 장소 불러오기`() = runBlockingTest {
-        val result = rawQueryDao.makePoint(1.0, 0.0)
         placeDao.upsert(
-            Place(
-                name = "강남 11출 또피빈",
-                geometry = result
-            )
+            name = "강남 11출 또피빈",
+            latitude = 1.0,
+            longitude = 0.0
         )
-    }
-
-    @Test
-    fun `위치 데이터베이스 테스트`() = runBlockingTest {
-
-        val result = rawQueryDao.makePoint(1.0, 0.0)
-
-        print(result)
-        val result2 = rawQueryDao.pointFromText("POINT(1.0 0.0)")
-        print(result2)
+        val places = placeDao.getPlacesWithinRadius(1.0, 0.005, 1000)
+        for (place: Place in places) {
+            assert(place.distance != null && place.distance!! <= 1000)
+        }
     }
 }

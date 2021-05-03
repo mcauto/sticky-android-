@@ -19,14 +19,11 @@ data class Place(
     val placeId: Long? = null,
     val name: String,
     val isFavorite: Boolean = false,
-    val geometry: ByteArray
-)
-
-data class PlaceWithPoint(
-    val placeId: Long,
-    val name: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val geometry: ByteArray?,
+    // 현재 위치로부터 장소까지의 거리를 불러오기 위한 읽기용 필드
+    val distance: Double? = 0.0,
 )
 
 /**
