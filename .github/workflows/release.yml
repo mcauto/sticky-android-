@@ -38,8 +38,8 @@ jobs:
           echo "$DESCRIPTION" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_ENV 
-          sed -i "s/[^[:blank:]]*versionCode .*/versionCode ${GITHUB_RUN_NUMBER}/g" app/build.gradle
-          sed -i "s/[^[:blank:]]*versionName .*/versionName \"${VERSION}\"/g" app/build.gradle
+          sed -i "s/versionCode .*/versionCode ${GITHUB_RUN_NUMBER}/g" app/build.gradle
+          sed -i "s/versionName .*/versionName \"${VERSION}\"/g" app/build.gradle
           git add app/build.gradle
           git commit --no-verify -m "chore(release): ${VERSION}"
           npx standard-version
